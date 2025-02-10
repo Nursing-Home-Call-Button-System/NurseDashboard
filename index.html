@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nurse Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js"></script>
+    <script defer src="script.js"></script>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Nurse Dashboard</h1>
+    <table>
+        <tr>
+            <th>Patient Name</th>
+            <th>Room Number</th>
+            <th>Time</th>
+            <th>Voice Memo</th>
+            <th>Note</th>
+        </tr>
+        <tr>
+            <td id="patient-name">Loading...</td>
+            <td id="room-number">Loading...</td>
+            <td id="time">Loading...</td>
+            <td><audio id="voice-memo" controls></audio></td>
+            <td><textarea id="nurse-note" rows="2" cols="30" placeholder="Enter notes..."></textarea></td>
+        </tr>
+    </table>
+    <button id="save-note">Save Note</button>
+</body>
+</html>
