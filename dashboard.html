@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nurse Dashboard</title>
+    
+
+    <script defer src="script.js"></script> <!-- Load script.js -->
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    
+    <h1>Nurse Dashboard</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Patient Name</th>
+                <th>Room Number</th>
+                <th>Time</th>
+                <th>Voice Memo</th>
+                <th>Note</th>
+            </tr>
+        </thead>
+        <tbody id="patient-table-body">
+            <!-- Patients will be dynamically added here -->
+        </tbody>
+    </table>
+
+    <button id="save-note">Save Note</button>
+    <button id="logout-btn">Logout</button>
+
+</body>
+</html>
