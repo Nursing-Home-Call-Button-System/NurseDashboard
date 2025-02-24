@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Nurse Login</title>
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
+
+  <script>
+    // ✅ Firebase Configuration
+    const firebaseConfig = {
+        apiKey: "AIzaSyCKLMx3Vi1Lo_TB6D942OWdmtD_kihL9h4",
+        authDomain: "nurse-websit.firebaseapp.com",
+        databaseURL: "https://nurse-websit-default-rtdb.firebaseio.com/",
+        projectId: "nurse-websit",
+        storageBucket: "nurse-websit.appspot.com",
+        messagingSenderId: "982443926776",
+        appId: "1:982443926776:web:7bf7e73353311b6f5a870d"
+    };
+
+    // ✅ Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+
+    // ✅ Check if user is already logged in and redirect to dashboard
+    firebase.auth().onAuthStateChanged(user => {
+        if (user) {
+            window.location.href = 'dashboard.html'; // Redirect if already logged in
+        }
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+      document.getElementById('login-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const email = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+        
+        auth.signInWithEmailAndPassword(email, password)
+          .then(() => {
+            sessionStorage.setItem("authenticated", "true"); // ✅ Store login session
+            window.location.href = 'dashboard.html'; // ✅ Redirect after login
+          })
+          .catch(error => {
+            alert(error.message || 'Login failed');
+          });
+      });
+    });
+  </script>
+</head>
+<body>
+  <h2>Nurse Login</h2>
+  <form id="login-form">
+    <input type="email" id="username" placeholder="Email" required><br>
+    <input type="password" id="password" placeholder="Password" required><br>
+    <button type="submit">Login</button>
+  </form>
+</body>
+</html>
