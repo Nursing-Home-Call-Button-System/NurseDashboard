@@ -3,103 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nurse Dashboard</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Nurse Login</title>
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
     <script defer src="script.js"></script>
-    <style>
-        body { font-family: Arial, sans-serif; }
-        .hidden { display: none; }
-        #login-container {
-            width: 300px;
-            margin: 100px auto;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
-            text-align: center;
-        }
-        #dashboard { text-align: center; margin-top: 20px; }
-        table { width: 100%; border-collapse: collapse; }
-        th, td { border: 1px solid black; padding: 10px; text-align: left; }
-        th { background-color: #f2f2f2; }
-        #logout-btn {
-            margin-top: 10px;
-            padding: 10px 20px;
-            background-color: red;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-    </style>
 </head>
 <body>
-
-    <!-- Nurse Login Screen -->
     <div id="login-container">
         <h2>Nurse Login</h2>
         <input type="email" id="email" placeholder="Email" required><br><br>
-        <input type="password" id="nurse-password" placeholder="Password" required><br><br>
+        <input type="password" id="password" placeholder="Password" required><br><br>
         <button id="login-btn">Login</button>
         <p id="login-error" style="color: red;"></p>
     </div>
-
-    <!-- Nurse Dashboard -->
-    <div id="dashboard" class="hidden">
-        <h1>Nurse Dashboard</h1>
-        <button id="logout-btn">Logout</button>
-        <table>
-            <thead>
-                <tr>
-                    <th>Patient Name</th>
-                    <th>Room Number</th>
-                    <th>Time</th>
-                    <th>Voice Memo</th>
-                    <th>Note</th>
-                </tr>
-            </thead>
-            <tbody id="patient-table-body"></tbody>
-        </table>
-    </div>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const loginBtn = document.getElementById("login-btn");
-            const logoutBtn = document.getElementById("logout-btn");
-            const loginError = document.getElementById("login-error");
-
-            firebase.auth().onAuthStateChanged(user => {
-                if (user) {
-                    window.location.href = "dashboard.html"; // Redirect if logged in
-                }
-            });
-
-            if (loginBtn) {
-                loginBtn.addEventListener("click", function () {
-                    const email = document.getElementById("email").value;
-                    const password = document.getElementById("nurse-password").value;
-
-                    firebase.auth().signInWithEmailAndPassword(email, password)
-                        .then(() => {
-                            window.location.href = "dashboard.html"; // Redirect
-                        })
-                        .catch(() => {
-                            loginError.textContent = "Invalid email or password!";
-                        });
-                });
-            }
-
-            if (logoutBtn) {
-                logoutBtn.addEventListener("click", function () {
-                    firebase.auth().signOut().then(() => {
-                        window.location.href = "index.html"; // Redirect to login
-                    });
-                });
-            }
-        });
-    </script>
-
 </body>
 </html>
